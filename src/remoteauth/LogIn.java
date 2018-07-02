@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -93,7 +94,7 @@ public class LogIn extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        rb_uuid = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         tf_search = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -110,6 +111,7 @@ public class LogIn extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         tf_username = new javax.swing.JTextField();
@@ -225,6 +227,9 @@ public class LogIn extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(0, 191, 254));
         jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel8MouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jPanel8MouseExited(evt);
             }
@@ -319,9 +324,9 @@ public class LogIn extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_createName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jl_4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jl_4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_createName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -398,10 +403,12 @@ public class LogIn extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jRadioButton1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setText("UUID");
+        buttonGroup1.add(rb_uuid);
+        rb_uuid.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        rb_uuid.setForeground(new java.awt.Color(255, 255, 255));
+        rb_uuid.setText("UUID");
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("Username");
@@ -431,7 +438,7 @@ public class LogIn extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton1))))
+                            .addComponent(rb_uuid))))
                 .addGap(14, 14, 14))
         );
         jPanel11Layout.setVerticalGroup(
@@ -440,7 +447,7 @@ public class LogIn extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(rb_uuid)
                         .addGap(11, 11, 11)
                         .addComponent(jRadioButton2))
                     .addGroup(jPanel11Layout.createSequentialGroup()
@@ -719,6 +726,18 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel10MouseExited
 
     private void bt_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_loginMouseClicked
+        if(!tf_username.getText().isEmpty()){
+            if(!tf_password.getText().isEmpty()){
+                //callLogin(tf_username.getText(), tf_password.getText());
+                //if(login)
+                    jd_userwindow.pack();
+                    jd_userwindow.setLocationRelativeTo(null);
+                    this.setVisible(false);
+                    jd_userwindow.setVisible(true);
+            } else
+                JOptionPane.showMessageDialog(this, "ingrese una contraseña valida.");
+        } else
+            JOptionPane.showMessageDialog(this, "ingrese un nombre de usuario valido.");
         jd_userwindow.pack();
         jd_userwindow.setLocationRelativeTo(null);
         this.setVisible(false);
@@ -732,10 +751,69 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
+        if (buttonGroup1.getSelection() != null){
+            boolean esUUID = false;
+            if(rb_uuid.isSelected())
+                esUUID = true;
+            if(!tf_search.getText().isEmpty()){
+                //if( esUUID ){
+                    //user = searchUUID()
+                    //if(user != null){
+                        //jd_userFound.pack();
+                        //jd_userFound.setLocationRelativeTo(null);
+                        //jd_userFound.setVisible(true);
+
+                        //Para setiar los valores en el jdialog de usuario encontrado
+                        //tf_usernameFound,setText(user.Username);
+                        //tf_nameFound,setText(user.Name);
+                        //tf_creationFound,setText(user.Creation);
+                        //tf_accessFound,setText(user.Access);
+                        //jd_userFound.pack();
+                        //jd_userFound.setLocationRelativeTo(null);
+                        //jd_userFound.setVisible(true);
+                    //} else
+                        //JOptionPane.showMessageDialog(this, "usuario no encontrado.");
+                //}
+                //else {
+                    //user = searchByUsername()
+                    //if(user != null){
+                        //jd_userFound.pack();
+                        //jd_userFound.setLocationRelativeTo(null);
+                        //jd_userFound.setVisible(true);
+
+                        //Para setiar los valores en el jdialog de usuario encontrado
+                        //tf_usernameFound,setText(user.Username);
+                        //tf_nameFound,setText(user.Name);
+                        //tf_creationFound,setText(user.Creation);
+                        //tf_accessFound,setText(user.Access);
+                        //jd_userFound.pack();
+                        //jd_userFound.setLocationRelativeTo(null);
+                        //jd_userFound.setVisible(true);
+                    //} else
+                        //JOptionPane.showMessageDialog(this, "usuario no encontrado.");
+                //}
+            } else
+                JOptionPane.showMessageDialog(this, "ingrese un nombre de usuario o UUID valido.");
+        } else
+                JOptionPane.showMessageDialog(this, "seleccione busqueda por un nombre de usuario o UUID.");
         jd_userFound.pack();
         jd_userFound.setLocationRelativeTo(null);
         jd_userFound.setVisible(true);
     }//GEN-LAST:event_jPanel10MouseClicked
+
+    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+        if(!tf_createUsername.getText().isEmpty()){
+            if(!tf_createName.getText().isEmpty()){
+                if(!tf_createPassword.getText().isEmpty()){
+                    //if( createUser(tf_createUsername.getText(), tf_createPassword.getText()) )
+                    //else JOptionPane.showMessageDialog(this, "usuario ya existe.");
+                } else
+                    JOptionPane.showMessageDialog(this, "ingrese una contraseña valida.");
+            } else
+                JOptionPane.showMessageDialog(this, "ingrese un nombre valido.");
+        } else
+            JOptionPane.showMessageDialog(this, "ingrese un nombre de usuario valido.");
+    }//GEN-LAST:event_jPanel8MouseClicked
 
     /**
      * @param args the command line arguments
@@ -774,6 +852,7 @@ public class LogIn extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bt_login;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -808,7 +887,6 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -821,6 +899,7 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JLabel jl_3;
     private javax.swing.JLabel jl_4;
     private javax.swing.JLabel jl_5;
+    private javax.swing.JRadioButton rb_uuid;
     private javax.swing.JTextField tf_accessFound;
     private javax.swing.JTextField tf_createName;
     private javax.swing.JTextField tf_createPassword;
