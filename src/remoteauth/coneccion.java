@@ -5,6 +5,7 @@
  */
 package remoteauth;
 
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -19,7 +20,7 @@ import java.util.UUID;
  *
  * @author josef
  */
-public class coneccion {
+public class coneccion extends UnicastRemoteObject implements NewInterface {
     Connection con = null;
     String connection = "jdbc:sqlserver://localhost:1433;databaseName=OS2;user=pruebas;password=1234";
     public coneccion(){
