@@ -7,17 +7,19 @@ package remoteauth;
 
 import java.rmi.Remote;
 import java.util.ArrayList;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 /**
  *
  * @author josef
  */
 public interface NewInterface extends Remote {
-    boolean insertar(String aejecutar);
-    String autenticar(String login , String password);
-     ArrayList todos();
-     ArrayList porlogin(String loginname);
-     ArrayList porid(String loginname);
-     boolean borrar(String loginname, String password);
+    boolean insertar(String aejecutar) throws RemoteException;
+    String autenticar(String login , String password) throws RemoteException;
+     ArrayList todos() throws RemoteException;
+     ArrayList porlogin(String loginname) throws RemoteException;
+     ArrayList porid(String loginname) throws RemoteException;
+     boolean borrar(String loginname, String password) throws RemoteException;
     
 }

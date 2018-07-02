@@ -5,6 +5,7 @@
  */
 package remoteauth;
 
+import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.Date;
@@ -23,7 +24,7 @@ import java.util.UUID;
 public class coneccion extends UnicastRemoteObject implements NewInterface {
     Connection con = null;
     String connection = "jdbc:sqlserver://localhost:1433;databaseName=OS2;user=pruebas;password=1234";
-    public coneccion(){
+    public coneccion() throws RemoteException{
        con = null;
        connection = "jdbc:sqlserver://localhost:1433;databaseName=OS2;user=pruebas;password=1234";
         try {
@@ -36,6 +37,7 @@ public class coneccion extends UnicastRemoteObject implements NewInterface {
         }
         
     }
+    @Override
     public boolean insertar(String aejecutar){
          try {
              PreparedStatement statement = con.prepareStatement(aejecutar);
@@ -46,6 +48,7 @@ public class coneccion extends UnicastRemoteObject implements NewInterface {
        }
          return true;
     }
+    @Override
     public String autenticar(String login , String password){
         try {
             String ejecucion="select* from usuario where loginname='"+login+"'"+ " and password='"+password+"'";
@@ -75,6 +78,7 @@ public class coneccion extends UnicastRemoteObject implements NewInterface {
        }
          
     }
+    @Override
     public  ArrayList todos(){
         ArrayList list=new ArrayList();
         try {
@@ -108,6 +112,7 @@ public class coneccion extends UnicastRemoteObject implements NewInterface {
              return list;
        }
     }
+    @Override
      public  ArrayList porlogin(String loginname){
          ArrayList list=new ArrayList();
         try {
@@ -140,6 +145,7 @@ public class coneccion extends UnicastRemoteObject implements NewInterface {
              return list;
        }
      }
+     @Override
      public  ArrayList porid(String loginname){
          ArrayList list=new ArrayList();
         try {
@@ -172,6 +178,7 @@ public class coneccion extends UnicastRemoteObject implements NewInterface {
              return list;
        }
      }
+     @Override
      public boolean borrar(String loginname, String password){
          try{
              String ejecucion="delete from usuario where loginname= '"+loginname+"' and password = '"+ password +"'";
